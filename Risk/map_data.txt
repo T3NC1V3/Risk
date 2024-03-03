@@ -1,0 +1,48 @@
+Continent:North America
+Country:Alaska
+Country:Alberta
+Country:Central America
+Country:Eastern United States
+Country:Greenland
+Country:Northwest Territory
+Country:Ontario
+Country:Quebec
+Country:Western United States
+Continent:South America
+Country:Argentina
+Country:Brazil
+Country:Peru
+Country:Venezuela
+Continent:Europe
+Country:Great Britain
+Country:Iceland
+Country:Northern Europe
+Country:Scandinavia
+Country:Southern Europe
+Country:Ukraine
+Country:Western Europe
+Continent:Africa
+Country:Congo
+Country:East Africa
+Country:Egypt
+Country:Madagascar
+Country:North Africa
+Country:South Africa
+Continent:Asia
+Country:Afghanistan
+Country:China
+Country:India
+Country:Irkutsk
+Country:Japan
+Country:Kamchatka
+Country:Middle East
+Country:Mongolia
+Country:Siam
+Country:Siberia
+Country:Ural
+Country:Yakutsk
+Continent:Australia
+Country:Eastern Australia
+Country:Indonesia
+Country:New Guinea
+Country:Western Australia

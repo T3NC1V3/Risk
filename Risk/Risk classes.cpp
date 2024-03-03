@@ -46,6 +46,19 @@ public:
     Country(string name, int troops, int owner) : name(name), troops(troops), ownership(owner) {}
 };
 
+class Player { // Player Class definition
+private:
+    int playerNumber, armyBonus; // player number determines turn order
+    bool isAttacking, isReinforcing, isFortified, isDefending, isOut;
+    int cards[5]; // Array for card system 
+public:
+    string playerName;
+    Player(string playerName, int playerNo, int extraArmies) : playerName(playerName), playerNumber(playerNo), armyBonus(extraArmies) {}
+    void reinforce() {} // the different phases and turns as needed
+    void attacking() {}
+    void fortify() {}
+};
+
 WorldMap::WorldMap() {} // parameterless constructor
 
 // Function to save the graph to a text file
