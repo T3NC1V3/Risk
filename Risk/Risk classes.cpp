@@ -11,14 +11,25 @@ using namespace std;
 class WorldMap {
 private:
     unordered_map<string, vector<string>> mapIndex; // Main graph listing continents
-    vector<string> players; // Player index
+    Player players[2]; 
+    int currentPlayerIndex; // Player index
     bool gameOver;
 public:
-    WorldMap();
+    WorldMap(string player1Name, string player2Name) : players{ Player(player1Name), Player(player2Name) }, currentPlayerIndex(0) {}
+    void switchTurn() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % 2;
+        cout << "It's now " << players[currentPlayerIndex].getName() << "'s turn." << endl;
+    }
     void writeToFile(const string& filename) const; // Function to save the graph to a text file
     void readFile(const string& filename);
     void addContinent(const Continent& continent) { mapIndex[continent.getName()] = continent.getCountries(); } 
     // manually add continents, user defined, will provide functions later
+
+    void play() {
+        while (players[0].isAlive() && players[1].isAlive()) {
+            switchTurn();
+        }
+    }
 };
 
 class Continent { // Continent is subgraph of the map
@@ -49,9 +60,9 @@ public:
 
 class Player { // Player Class definition
 private:
-    int playerNumber, armyBonus; // player number determines turn order
+    int armyBonus; 
     bool isAttacking, isReinforcing, isFortified, isDefending, isOut;
-    int countryCount = mapIndex.size / 4; //amount of countries 
+    int countryCount = mapIndex.size / 2; //amount of countries 
     int armies = 0; // amount of armies
     int tradeins = 0; // no. of trade ins
     char usrYN; // user yes or no input
@@ -59,7 +70,13 @@ private:
     vector<string> ownedCountries;
 public:
     string playerName;
-    Player(string playerName, int playerNo, int extraArmies) : playerName(playerName), playerNumber(playerNo), armyBonus(extraArmies) {}
+    bool isAlive() {
+        return countryCount > 0; // if 0 land left, ded
+    }
+    Player(string playerName, int extraArmies) : playerName(playerName), armyBonus(extraArmies) {}
+    string getName() {
+        return playerName;
+    }
     void reinforce() {
         countryCount < 9 ? armies += 3 : armies += countryCount / 3; //amount of armies to be given
         //having issues with code for conqure bonus need to check if a contient is conqured and then give amount base on cont value
@@ -183,8 +200,6 @@ public:
     }
 };
 
-WorldMap::WorldMap() {} // parameterless constructor
-
 // Function to save the graph to a text file
 void WorldMap::writeToFile(const string& filename) const {
     ofstream file(filename);
@@ -229,7 +244,7 @@ void WorldMap::readFile(const string& filename) {
 }
 
 int main() {
-    WorldMap world;
+    WorldMap world("Player 1", "Player 2");
     world.readFile("map_data.txt"); // loads txt and reads data
     return 0;
 }
